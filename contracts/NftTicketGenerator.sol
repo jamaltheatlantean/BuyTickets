@@ -16,5 +16,6 @@ contract NftTicketGenerator {
 
     uint public constant TICKET_PRICE = 10 * 1e2; // ticket amount
 
-
+    mapping(address => bool) public isBuyer;
+    mapping(address => uint) public amountPaid;
 }
