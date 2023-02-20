@@ -3,6 +3,10 @@ pragma solidity ^0.8.8;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
+/**
+ * contract creates the NFT ticket for use.
+ */
+
 contract TicketToken is ERC721 {
     uint256 private s_tokenCounter;
 
