@@ -1,8 +1,5 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.8;
-// 0x0A1ca5333e7d2Fac1cD1d81D89BC3797c0d83dd7 friend address
-// contract address: 
-
 
 import "./IERC721.sol";
 
