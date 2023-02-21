@@ -15,7 +15,10 @@ contract NftTicketGenerator {
     address public buyers; // address of buyers
 
     uint public constant TICKET_PRICE = 10 * 1e2; // ticket amount
+    uint public constant MAX_NUM_OF_TICKET = 100; // only 100 tickets can be minted
 
-    mapping(address => bool) public isBuyer;
+    mapping(address => bool) public buyer;
+    mapping(address => bool) public hasPaid;
     mapping(address => uint) public amountPaid;
+
 }
