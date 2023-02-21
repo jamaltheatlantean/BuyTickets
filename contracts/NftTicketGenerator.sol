@@ -16,7 +16,9 @@ contract NftTicketGenerator is ERC721 {
 
     uint public constant TICKET_PRICE = 10 * 1e4; // ticket amount
     uint public minAmountToPay = 10 * 1e2;
+
     uint public constant MAX_NUM_OF_TICKET = 100; // only 100 tickets can be minted
+    uint public numOfTicketsMinted = 0;
     uint private tokenCounter;
 
     mapping(address => bool) public buyer;
@@ -31,9 +33,10 @@ contract NftTicketGenerator is ERC721 {
         require(amount >= minAmountToPay, "error: not enough to pay for ticket");
         hasPaid[msg.sender] = true;
         amountPaid[msg.sender] += msg.value;
-        if(amountPaid[msg.sender] >= TICKET_PRICE && MAX_NUM_OF_TICKET <= 100) {
+        if(amountPaid[msg.sender] >= TICKET_PRICE && numOfTicketsMinted <= MAX_NUM_OF_TICKET) {
             _safeMint(msg.sender, tokenCounter);
             tokenCounter += 1;
+            numOfTicketsMinted += 1;
         }
     }
 
