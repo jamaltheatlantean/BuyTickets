@@ -71,4 +71,6 @@ contract NftTicketGenerator is ERC721 {
         (bool success, ) = ticketSeller.call{value: amount}("amount");
         require(success, "error: failed to send eth");
     }
+
+    // create function to refund installmental ticket buyers incase they change their mind
 }
