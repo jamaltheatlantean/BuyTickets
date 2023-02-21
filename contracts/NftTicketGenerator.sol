@@ -36,12 +36,12 @@ contract NftTicketGenerator is ERC721 {
         hasPaid[msg.sender] = true;
         amountPaid[msg.sender] += msg.value;
         if(amountPaid[msg.sender] >= TICKET_PRICE && numOfTicketsMinted <= MAX_NUM_OF_TICKETS) {
-            _safeMint(msg.sender, tokenCounter);
             tokenCounter += 1;
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
             uint ticketFullyPaid = amountPaid[msg.sender];
             payable(ticketSeller).transfer(ticketFullyPaid);
+            _safeMint(msg.sender, tokenCounter);
         }
     }
 
@@ -49,6 +49,7 @@ contract NftTicketGenerator is ERC721 {
         require(amount >= TICKET_PRICE, "error: not enough to pay at once");
         require(hasBoughtTicket[msg.sender] != true, "error: one ticket per wallet");
         hasPaid[msg.sender] = true;
+        hasBoughtTicket[msg.sender] = true;
         _safeMint(msg.sender, tokenCounter);
 
 
