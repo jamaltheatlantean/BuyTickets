@@ -30,6 +30,7 @@ contract NftTicketGenerator is ERC721 {
         ticketSeller = msg.sender;
     }
 
+    // use function to buy ticket installmentally
     function buyTicket(uint amount) external payable {
         require(
             amount >= minAmountToPay,
@@ -48,13 +49,14 @@ contract NftTicketGenerator is ERC721 {
             tokenCounter += 1;
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
+            _safeMint(msg.sender, tokenCounter);
             uint ticketFullyPaid = amountPaid[msg.sender];
             payable(ticketSeller).transfer(ticketFullyPaid);
-            _safeMint(msg.sender, tokenCounter);
         }
     }
 
-    function buyTicketAtOnce() external payable {
+    // use function to buy ticket once
+    function buyTicketAtOnce(uint amount) external payable {
         require(amount >= TICKET_PRICE, "error: not enough to pay at once");
         require(
             hasBoughtTicket[msg.sender] != true,
@@ -62,8 +64,11 @@ contract NftTicketGenerator is ERC721 {
         );
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
+        tokenCounter += 1;
+        numOfTicketsMinted += 1;
         _safeMint(msg.sender, tokenCounter);
+        // using call to transfer ether because the buyTicketAtOnce function is more gas efficient.
+        (bool success, ) = ticketSeller.call{value: amount}("amount");
+        require(success, "error: failed to send eth");
     }
-
-
 }
