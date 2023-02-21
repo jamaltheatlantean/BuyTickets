@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: SEE LICENSE IN LICENSE
 pragma solidity >=0.8.8 <0.9.0;
 
- import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 
 /**
  * This contract creates new tickets for users
@@ -31,11 +31,20 @@ contract NftTicketGenerator is ERC721 {
     }
 
     function buyTicket(uint amount) external payable {
-        require(amount >= minAmountToPay, "error: not enough to pay for ticket");
-        require(hasBoughtTicket[msg.sender] != true, "error: one ticket per wallet");
+        require(
+            amount >= minAmountToPay,
+            "error: not enough to pay for ticket"
+        );
+        require(
+            hasBoughtTicket[msg.sender] != true,
+            "error: one ticket per wallet"
+        );
         hasPaid[msg.sender] = true;
         amountPaid[msg.sender] += msg.value;
-        if(amountPaid[msg.sender] >= TICKET_PRICE && numOfTicketsMinted <= MAX_NUM_OF_TICKETS) {
+        if (
+            amountPaid[msg.sender] >= TICKET_PRICE &&
+            numOfTicketsMinted <= MAX_NUM_OF_TICKETS
+        ) {
             tokenCounter += 1;
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
@@ -47,12 +56,14 @@ contract NftTicketGenerator is ERC721 {
 
     function buyTicketAtOnce() external payable {
         require(amount >= TICKET_PRICE, "error: not enough to pay at once");
-        require(hasBoughtTicket[msg.sender] != true, "error: one ticket per wallet");
+        require(
+            hasBoughtTicket[msg.sender] != true,
+            "error: one ticket per wallet"
+        );
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
         _safeMint(msg.sender, tokenCounter);
-
-
     }
+
 
 }
