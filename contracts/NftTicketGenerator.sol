@@ -74,6 +74,8 @@ contract NftTicketGenerator is ERC721 {
 
     // use function to get a refund for installmental payers
     function refund(uint refundBal) external payable {
-
+        uint refundBal = amountPaid[msg.sender];
+        amountPaid[msg.sender] = 0;
+        
     }
 }
