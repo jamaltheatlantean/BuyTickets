@@ -80,5 +80,6 @@ contract NftTicketGenerator is ERC721 {
             payable(msg.sender).transfer(refundBal);
         } else {
             revert Ticket__AlreadyBought;
+        }
     }
 }
