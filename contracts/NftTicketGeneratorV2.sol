@@ -27,6 +27,11 @@ contract NftTicketGeneratorV2 is ERC721 {
     mapping(address => uint) public amountPaid;
     mapping(address => bool) public hasBoughtTicket;
 
+    modifier onlyTicketSeller() {
+        require(msg.sender == ticketSeller, "error: not ticketSeller");
+        _;
+    }
+
     constructor() ERC721("TicketToken", "TKN") {
         ticketSeller = msg.sender;
     }
@@ -85,8 +90,9 @@ contract NftTicketGeneratorV2 is ERC721 {
         }
     }
 
+    // use function to withdraw ticket fees
     function withdraw() external onlyTicketSeller {
-        
+        payable(ticketSeller).transfer(address(this).balance);
     }
 
 }
