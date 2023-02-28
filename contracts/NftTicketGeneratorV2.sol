@@ -13,6 +13,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     event TicketMinted(address indexed buyer, uint timestamp);
     event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp);
     event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp);
+    event FeesRetrieved(uint indexed amount);
 
     address public ticketSeller; // ticket seller
 
@@ -59,7 +60,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenCounter);
             // emit event
-            TicketBought(msg.sender, block.timestamp);
+            emit TicketBought(msg.sender, block.timestamp);
         }
         // emit event
         emit Instlmnt(msg.sender, amount, block.timestamp);
@@ -88,7 +89,6 @@ contract NftTicketGeneratorV2 is ERC721 {
         } else {
             revert Ticket__AlreadyBought();
         }
-
         //emit event
         emit BuyerRefunded(msg.sender, refundBal, block.timestamp);
     }
@@ -96,6 +96,8 @@ contract NftTicketGeneratorV2 is ERC721 {
     // use function to withdraw ticket fees
     function withdraw() external onlyTicketSeller {
         payable(ticketSeller).transfer(address(this).balance);
+        // emit event
+        emit FeesRetrieved(amount);
     }
 
 }
