@@ -46,6 +46,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] != true,
             "error: one ticket per wallet"
         );
+        buyer[msg.sender] = true;
         hasPaid[msg.sender] = true;
         amountPaid[msg.sender] += msg.value;
         if (
@@ -56,7 +57,11 @@ contract NftTicketGeneratorV2 is ERC721 {
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenCounter);
+            // emit event
+            TicketBought(msg.sender, block.timestamp);
         }
+        // emit event
+        emit Instlmnt(msg.sender, block.timestamp);
     }
 
     // use function to buy ticket once
