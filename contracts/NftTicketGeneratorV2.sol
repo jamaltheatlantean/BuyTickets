@@ -73,10 +73,6 @@ contract NftTicketGeneratorV2 is ERC721 {
         tokenCounter += 1;
         numOfTicketsMinted += 1;
         _safeMint(msg.sender, tokenCounter);
-        // using call to transfer ether because the buyTicketAtOnce function is more gas efficient.
-        //(bool success, ) = ticketSeller.call{value: amount}("amount");
-        //require(success, "error: failed to send eth");
-        payable(ticketSeller).transfer(amount);
     }
 
     // use function to get a refund for installmental payers
