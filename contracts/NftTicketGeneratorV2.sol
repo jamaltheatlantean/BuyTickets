@@ -56,8 +56,6 @@ contract NftTicketGeneratorV2 is ERC721 {
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenCounter);
-            uint ticketFullyPaid = amountPaid[msg.sender];
-            payable(ticketSeller).transfer(ticketFullyPaid);
         }
     }
 
