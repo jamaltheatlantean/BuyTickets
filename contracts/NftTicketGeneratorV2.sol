@@ -11,6 +11,7 @@ error Ticket__AlreadyBought();
 contract NftTicketGeneratorV2 is ERC721 {
     event TicketBought(address indexed buyer, uint timestamp);
     event TicketMinted(address indexed buyer, uint timestamp);
+    event Instlmnt(addres indexed buyer, uint indexed amount, uint timestamp);
 
     address public ticketSeller; // ticket seller
     address public buyers; // address of buyers
@@ -61,7 +62,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             TicketBought(msg.sender, block.timestamp);
         }
         // emit event
-        emit Instlmnt(msg.sender, block.timestamp);
+        emit Instlmnt(msg.sender, amount, block.timestamp);
     }
 
     // use function to buy ticket once
