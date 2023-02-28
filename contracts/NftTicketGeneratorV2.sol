@@ -11,10 +11,10 @@ error Ticket__AlreadyBought();
 contract NftTicketGeneratorV2 is ERC721 {
     event TicketBought(address indexed buyer, uint timestamp);
     event TicketMinted(address indexed buyer, uint timestamp);
-    event Instlmnt(addres indexed buyer, uint indexed amount, uint timestamp);
+    event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp);
+    event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp);
 
     address public ticketSeller; // ticket seller
-    address public buyers; // address of buyers
 
     uint public constant TICKET_PRICE = 10 * 1e4; // ticket amount
     uint public minAmountToPay = 10 * 1e2;
@@ -88,6 +88,9 @@ contract NftTicketGeneratorV2 is ERC721 {
         } else {
             revert Ticket__AlreadyBought();
         }
+
+        //emit event
+        emit BuyerRefunded(msg.sender, refundBal, block.timestamp);
     }
 
     // use function to withdraw ticket fees
