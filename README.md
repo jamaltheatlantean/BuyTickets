@@ -23,6 +23,8 @@ Creating Tomiwas ticket app. Breakdown of all the .sol contracts coming up
     **STATUS: Failed.
 
 ## The TicketToken.sol
+    This contract is an ERC721. I built it to serve as the tickets to be loaded into the `Tickets.sol` contract. 
+    I minted 3 of them and loaded them into the `Tickets.sol` contract and minted them to address of friends during testing on Remix.
 
 
 
