@@ -97,7 +97,6 @@ contract NftTicketGeneratorV2 is ERC721 {
     function withdraw() external onlyTicketSeller {
         payable(ticketSeller).transfer(address(this).balance);
         // emit event
-        emit FeesRetrieved(amount);
+        emit FeesRetrieved(address(this).balance);
     }
-
 }
