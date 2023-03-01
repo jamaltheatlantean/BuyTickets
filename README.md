@@ -26,8 +26,8 @@ I could make the process of adding the address of friends easy by implementing a
     I declared this a failed contract because it required so much work to be done by the ticket seller before it was ready. 
 
 ## The TicketToken.sol
-    This contract is an ERC721. I built it to serve as the tickets to be loaded into the `Tickets.sol` contract. 
-    I minted 3 of them and loaded them into the `Tickets.sol` contract and minted them to address of friends during testing on Remix.
+This contract is an ERC721. I built it to serve as the tickets to be loaded into the `Tickets.sol` contract. 
+I minted 3 of them and loaded them into the `Tickets.sol` contract and minted them to address of friends during testing on Remix.
 
     STATUS: Success.
 
@@ -53,7 +53,7 @@ I got the logic for this contract by combining the `Tickets.sol` and the `Ticket
     This overloads the function and results to the gas estimation error.
     
 
-## The nNftTicketGeneratorV2.sol
+## The NftTicketGeneratorV2.sol
 
 
 
