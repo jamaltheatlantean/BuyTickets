@@ -32,6 +32,8 @@
     STATUS: Success.
 
 ## The NftTicketGenerator.sol
+
+
     Due to the impracticality of the Tickets.sol contract, i created a new type of logic with this NftGenerator. 
     The aim of this contract was to smoothen the process of buyers and the ticketr seller.
     The contract doesn't need any NFT loaded into it, as it mints new ERC721's (TKN) everytime a buyer sucessfully buys a ticket. 
@@ -50,4 +52,9 @@
     The buyTicket() function not only receives ether, it also mints the ticket to the buyer and lastly sends the ether spent by the buyer to the ticket seller at once.
     This overloads the function and results to the gas estimation error.
     
+
+## The nNftTicketGeneratorV2.sol
+
+
+
 
