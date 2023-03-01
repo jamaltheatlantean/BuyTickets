@@ -26,6 +26,14 @@ Creating Tomiwas ticket app. Breakdown of all the .sol contracts coming up
     This contract is an ERC721. I built it to serve as the tickets to be loaded into the `Tickets.sol` contract. 
     I minted 3 of them and loaded them into the `Tickets.sol` contract and minted them to address of friends during testing on Remix.
 
+    **STATUS: Success.
+
+## The NftGenerator.sol
+    Due to the impracticality of the Tickets.sol contract, i created a new type of logic with this NftGenerator. 
+    The aim of this contract was to smoothen the process of buyers and the ticketr seller.
+    The contract doesn't need any NFT loaded into it, as it mints new ERC721's (TKN) everytime a buyer sucessfully buys a ticket. 
+    This solved all the impractical issues of the first `Tickets.sol` contract.
+
 
 
  
