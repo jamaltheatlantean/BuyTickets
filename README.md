@@ -48,4 +48,6 @@
     I purposely wanted the contract to ease the ticket seller gas wise.
     So i overloaded the function which led to it breaking down whenever a buyer tried to buy an NFT.
     The buyTicket() function not only receives ether, it also mints the ticket to the buyer and lastly sends the ether spent by the buyer to the ticket seller at once.
+    This overloads the function and results to the gas estimation error.
+    
 
