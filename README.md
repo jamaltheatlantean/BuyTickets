@@ -4,6 +4,7 @@
 -   This is a demo contract.
 -   Contract has no reentrancy guard and can be subjected to a hack.
 -   This contrtact implements the functions of an NFT according to Openzepplelins' ERC721 standard.
+-   This contract is experimental and should not be used in production. For use contact me at [twitter](https://twitter.com/thatatlantean).
 
 ## The Evolution of all .sol contracts
     The aim of creating this software was to create an apllication that lets users pay installmentally for the tickets to their favorite shows. The contract helps users save the money for these tickets inside the contract and away from their reach so they don't spend their ticket money.
@@ -42,7 +43,9 @@
     I got the logic for this contract by combining the Tickets.sol and the TicketToken.sol contracts. By borrowing the functionality of creating a new ERC721 with the logic of the Tickets.sol that lets friends by a new ticket, i arrived at the NftTicketGenerator.sol. A v1 preceeding the v0 Tickets.sol
 
     STATUS: Failed.
-    While this contract was great and included all the logic needed to make it a sucess, i overdid it. How?
-    Well, the contract compiles fine, but there was a function overload that led to a gas estimation error when interacting with the contract.
-
+    While this contract was great and included all the logic needed to make it a sucess, i overdid it, which led to declaring it a failed contract in need of iteration. How?
+    Well, the contract compiles fine, but there were function overloads that led to a gas estimation error when interacting with the contract.
+    I purposely wanted the contract to ease the ticket seller gas wise.
+    So i overloaded the function which led to it breaking down whenever a buyer tried to buy an NFT.
+    The buyTicket() function not only receives ether, it also mints the ticket to the buyer and lastly sends the ether spent by the buyer to the ticket seller at once.
 
