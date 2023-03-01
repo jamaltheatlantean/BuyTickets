@@ -32,8 +32,6 @@ I minted 3 of them and loaded them into the `Tickets.sol` contract and minted th
     STATUS: Success.
 
 ## The NftTicketGenerator.sol
-
-
 Due to the impracticality of the Tickets.sol contract, i created a new type of logic with this NftGenerator. 
 The aim of this contract was to smoothen the process of buyers and the ticketr seller.
 The contract doesn't need any NFT loaded into it, as it mints new ERC721's (TKN) everytime a buyer sucessfully buys a ticket. 
@@ -42,7 +40,8 @@ By having the contract mint its own ticket and transfer them to the buyer there 
 Now any one can buy the tickets and become a buyer.
 When a buy is sucessful the contract mints a new ticket and transfers it to the `msg.sender` or `buyer`. With this new logic all the seller has to do is deploy the contract, sit back and wait for buyers to interact with his deployed contract.
 
-I got the logic for this contract by combining the `Tickets.sol` and the `TicketToken.sol` contracts. By borrowing the functionality of creating a new ERC721 with the logic used to buy tickets in `Tickets.sol` i arrived at the NftTicketGenerator.sol. A v1 preceeding the v0 Tickets.sol
+I got the logic for this contract by combining the `Tickets.sol` and the `TicketToken.sol` contracts. By borrowing the functionality of creating a new ERC721 with the logic used to buy tickets installmentally and at once in `Tickets.sol` i implemented a `refund()` function that refunds installmental ticket purchases, if the buyer changes their mind on seeing the movie or he/she/they were not able to complete the installmental payment before the date of the movie.
+With this logic gives the arrived i created the `NftGenerator.sol`. A V1 preceeding the V0 `Tickets.sol`
 
     STATUS: Failed.
     While this contract was great and included all the logic needed to make it a sucess, i overdid it, which led to declaring it a failed contract in need of iteration. How?
@@ -54,7 +53,9 @@ I got the logic for this contract by combining the `Tickets.sol` and the `Ticket
     
 
 ## The NftTicketGeneratorV2.sol
+After carrying out a few iterations on the first `NftTicketGenerator.sol` the end result was a more perfect contract. 
+The `NftTicketGeneratorV2.sol` has a new `withdraw()` function that transfers the Eth paid by the buyers for the tickets to the ticketSellers address. 
+I tried to simplify this process in V1 of the contract but of course it didn't work.
 
-
-
-
+    STATUS: Success!
+    After
