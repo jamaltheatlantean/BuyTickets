@@ -17,7 +17,13 @@ Creating Tomiwas ticket app. Breakdown of all the .sol contracts coming up
     It required that the address of friends be fed into the contract at deployment.
     This wasn't very practical for me, as i thought about other friends wanting to join and save up for the tickets as well.
     My first fix for this was to create an add friend function so more friends could be added to the array of `address payable [] public friends`, but i came up with other reasons why the contract wouldnt be practical enough. 
-    "Why would the seller grant access to the game and get new tickets for the case.
+    "Why would the seller grant access to the contract to sell tickets?"
+    This v0 contract required the tickets to be loaded into the ncontract for sale. It was simply impractical, unless the deployer of the contract was the ticket seller and knew the address of the friends who wanted to purchase the tickets.
+    
+    **STATUS: Failed.
+
+## The TicketToken.sol
+
 
 
  
