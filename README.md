@@ -41,7 +41,7 @@ Now any one can buy the tickets and become a buyer.
 When a buy is sucessful the contract mints a new ticket and transfers it to the `msg.sender` or `buyer`. With this new logic all the seller has to do is deploy the contract, sit back and wait for buyers to interact with his deployed contract.
 
 I got the logic for this contract by combining the `Tickets.sol` and the `TicketToken.sol` contracts. By borrowing the functionality of creating a new ERC721 with the logic used to buy tickets installmentally and at once in `Tickets.sol` i implemented a `refund()` function that refunds installmental ticket purchases, if the buyer changes their mind on seeing the movie or he/she/they were not able to complete the installmental payment before the date of the movie.
-With this logic gives the arrived i created the `NftGenerator.sol`. A V1 preceeding the V0 `Tickets.sol`
+With this logic gives the arrived I created the `NftGenerator.sol`. A V1 preceeding the V0 `Tickets.sol`
 
     STATUS: Failed.
     While this contract was great and included all the logic needed to make it a sucess, i overdid it, which led to declaring it a failed contract in need of iteration. How?
@@ -54,8 +54,10 @@ With this logic gives the arrived i created the `NftGenerator.sol`. A V1 preceed
 
 ## The NftTicketGeneratorV2.sol
 After carrying out a few iterations on the first `NftTicketGenerator.sol` the end result was a more perfect contract. 
-The `NftTicketGeneratorV2.sol` has a new `withdraw()` function that transfers the Eth paid by the buyers for the tickets to the ticketSellers address. 
+The `NftTicketGeneratorV2.sol` has a new `withdraw()` function that transfers the Eth paid by the buyers for the tickets to the ticketSellers address, removing the load from the `buyTicket()` function.
 I tried to simplify this process in V1 of the contract but of course it didn't work.
 
     STATUS: Success!
-    After
+    After a successful series of testing this contract on the Remix IDE, all functions responded perfectly.
+
+Authors remark: The NftTicketGeneratorV2.sol is the most efficient smart contract for this project.

@@ -73,6 +73,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] != true,
             "error: one ticket per wallet"
         );
+        require(MAX_NUM_OF_TICKETS <= 100, "error: tickets sold out!");
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
         tokenCounter += 1;

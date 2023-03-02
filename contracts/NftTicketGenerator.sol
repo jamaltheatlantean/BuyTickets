@@ -16,7 +16,7 @@ contract NftTicketGenerator is ERC721 {
     address public buyers; // address of buyers
 
     uint public constant TICKET_PRICE = 10 * 1e4; // ticket amount
-    uint public minAmountToPay = 10 * 1e2;
+    uint public minAmountToPay = 10 * 1e2; // minimum amount to pay installmentally
 
     uint public constant MAX_NUM_OF_TICKETS = 100; // only 100 tickets can be minted
     uint public numOfTicketsMinted = 0;
