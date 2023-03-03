@@ -4,10 +4,14 @@
 -   This is a demo contract.
 -   Contract has no reentrancy guard and can be subjected to a hack.
 -   This contrtact implements the functions of an NFT according to Openzepplelins' ERC721 standard.
--   This contract is experimental and should not be used in production. For use contact me at [twitter](https://twitter.com/thatatlantean).
+-   This contract is experimental and should not be used in production. For use, contact me at [twitter](https://twitter.com/thatatlantean).
 
 ## The Evolution of all .sol contracts
-The aim of creating this software was to create an apllication that lets users pay installmentally for the tickets to their favorite shows. The contract helps users save the money for these tickets inside the contract and away from their reach so they don't spend their ticket money.
+The aim of creating this software was to create an apllication that lets users pay in  installment for the tickets to their favorite shows/concerts/movies etc, anything that would require the purchase of a ticket
+
+Note: The ticket would have to be an NFT.
+
+The contract helps users save the money for these tickets inside the contract and away from their reach so they don't spend their ticket money.
 Gradually, more function ideas came across my mind and i implemented them into the contracts.
 
 ##  The IERC721.sol
