@@ -68,4 +68,15 @@ Authors remark: The NftTicketGeneratorV2.sol is the most efficient smart contrac
 
 ### ABout the Project
 
-This amart contract was created to feauture a pay by installment function that lets users pay for the price of a ticket gradually but it also supports a pay-at-once option.
+This smart contract was created to feauture a pay by installment function that lets users pay for the price of a ticket gradually but it also supports a pay-at-once option.
+
+### Built With
+
+* [![Solidity][Soliditylang.org]][Solidity-url]
+
+## Features
+
+-   Supports installment. 
+-   Mints new tickets in the form of an ERC721.
+
+
