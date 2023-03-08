@@ -84,5 +84,6 @@ The contract has the following features:
 ## Events
 This contract makes use of the following events:
 
-
+-   `event TicketBought(address indexed buyer, uint timestamp)`: Emitted whenever a ticket has been completely purchased.
+-   `event TicketMinted(address indexed buyer, uint timestamp)`: 
 

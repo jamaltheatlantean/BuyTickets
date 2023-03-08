@@ -60,7 +60,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenCounter);
             // emit event
-            emit TicketBought(msg.sender, block.timestamp);
+            emit TicketMinted(msg.sender, block.timestamp);
         }
         // emit event
         emit Instlmnt(msg.sender, amount, block.timestamp);
@@ -79,6 +79,8 @@ contract NftTicketGeneratorV2 is ERC721 {
         tokenCounter += 1;
         numOfTicketsMinted += 1;
         _safeMint(msg.sender, tokenCounter);
+
+        emit TicketMinted(msg.sender, block.timestamp);
     }
 
     // use function to get a refund for installmental payers
