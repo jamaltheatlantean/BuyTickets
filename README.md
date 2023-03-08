@@ -75,8 +75,14 @@ This smart contract was created to feauture a pay by installment function that l
 * [![Solidity][Soliditylang.org]][Solidity-url]
 
 ## Features
+The contract has the following features:
 
 -   Supports installment. 
 -   Mints new tickets in the form of an ERC721.
+-   Users get a refund on incomplete payments.
+
+## Events
+This contract makes use of the following events:
+
 
 
