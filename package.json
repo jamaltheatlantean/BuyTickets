@@ -1,13 +1,13 @@
 {
   "name": "hardhat",
   "version": "1.0.0",
-  "description": "",
+  "description": "A contract for buying tickets created as ERC721",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "jamaltheatlantean",
   "license": "ISC",
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.5",
