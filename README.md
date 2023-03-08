@@ -65,3 +65,7 @@ I tried to simplify this process in V1 of the contract but of course it didn't w
     After a successful series of testing this contract on the Remix IDE, all functions responded perfectly.
 
 Authors remark: The NftTicketGeneratorV2.sol is the most efficient smart contract for this project.
+
+### ABout the Project
+
+This amart contract was created to feauture a pay by installment function that lets users pay for the price of a ticket gradually but it also supports a pay-at-once option.
