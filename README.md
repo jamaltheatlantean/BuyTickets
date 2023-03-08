@@ -89,3 +89,13 @@ This contract makes use of the following events:
 -   `event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp)`: Emitted when a user pays only installment.
 -   `event FeesRetrieved(uint indexed amount)`: Emitted when the ticket seller withdraws the balance from the contract.
 
+## Modifier
+The contract has only one modifier to limit access control:
+
+-   `onlyTicketSeller`
+
+## Getters
+Getters aren't created yet.
+
+
+
