@@ -9,7 +9,6 @@ error Ticket__AlreadyBought();
  * This contract creates new tickets for users
  */
 contract NftTicketGeneratorV2 is ERC721 {
-    event TicketBought(address indexed buyer, uint timestamp);
     event TicketMinted(address indexed buyer, uint timestamp);
     event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp);
     event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp);
