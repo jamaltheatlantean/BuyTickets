@@ -114,5 +114,10 @@ Don't forget to give the project a star! Thanks again!
 
 This contract is licensed under the MIT License.
 
+## Contact
 
+Jamaltheatlantean [Gabriel Isobara]                               
+Send me a tweet - [@twitter](https://twitter.com/ThatAtlantean)                                                            
+
+Or write me a mail - jamaltheatlantean@gmail.com
 
