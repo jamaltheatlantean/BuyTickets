@@ -16,7 +16,7 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     address public ticketSeller; // ticket seller
 
-    uint public constant TICKET_PRICE = 10 * 1e4; // ticket amount
+    uint public ticketPrice; // ticket amount
     uint public minAmountToPay = 10 * 1e2;
 
     uint public constant MAX_NUM_OF_TICKETS = 100; // only 100 tickets can be minted
@@ -51,7 +51,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         hasPaid[msg.sender] = true;
         amountPaid[msg.sender] += msg.value;
         if (
-            amountPaid[msg.sender] >= TICKET_PRICE &&
+            amountPaid[msg.sender] >= ticketPrice &&
             numOfTicketsMinted <= MAX_NUM_OF_TICKETS
         ) {
             tokenCounter += 1;
@@ -67,7 +67,7 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     // use function to buy ticket once
     function buyTicketAtOnce(uint amount) external payable {
-        require(amount >= TICKET_PRICE, "error: not enough to pay at once");
+        require(amount >= ticketPrice, "error: not enough to pay at once");
         require(
             hasBoughtTicket[msg.sender] != true,
             "error: one ticket per wallet"
@@ -100,5 +100,10 @@ contract NftTicketGeneratorV2 is ERC721 {
         payable(ticketSeller).transfer(address(this).balance);
         // emit event
         emit FeesRetrieved(address(this).balance);
+    }
+
+    function setTicketPrice(uint _ticketPrice) external onlyTicketSeller {
+        require(_ticketPrice != 0, "error: price cannot be 0");
+        ticketPrice = _ticketPrice;
     }
 }
