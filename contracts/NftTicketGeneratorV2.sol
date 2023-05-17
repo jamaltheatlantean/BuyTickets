@@ -54,10 +54,11 @@ contract NftTicketGeneratorV2 is ERC721 {
             amountPaid[msg.sender] >= ticketPrice &&
             numOfTicketsMinted <= MAX_NUM_OF_TICKETS
         ) {
-            tokenCounter += 1;
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenCounter);
+            // add to token counter after successful mint
+            tokenCounter ++;
             // emit event
             emit TicketMinted(msg.sender, block.timestamp);
         }
@@ -75,10 +76,10 @@ contract NftTicketGeneratorV2 is ERC721 {
         require(MAX_NUM_OF_TICKETS <= 100, "error: tickets sold out!");
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
-        tokenCounter += 1;
         numOfTicketsMinted += 1;
         _safeMint(msg.sender, tokenCounter);
-
+        // add to token counter after successful mint
+        tokenCounter ++;
         emit TicketMinted(msg.sender, block.timestamp);
     }
 
@@ -105,5 +106,9 @@ contract NftTicketGeneratorV2 is ERC721 {
     function setTicketPrice(uint _ticketPrice) external onlyTicketSeller {
         require(_ticketPrice != 0, "error: price cannot be 0");
         ticketPrice = _ticketPrice;
+    }
+
+    function transferTicket(address to, uint ticketId) external {
+        require(ownerOf(tokenCounter) == msg.sender, "error: ticket not callers");
     }
 }
