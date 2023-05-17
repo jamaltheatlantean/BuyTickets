@@ -10,8 +10,9 @@ error Ticket__AlreadyBought();
  */
 contract NftTicketGeneratorV2 is ERC721 {
     event TicketMinted(address indexed buyer, uint timestamp);
-    event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp);
-    event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp);
+    event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint indexed timestamp);
+    event Instlmnt(address indexed buyer, uint indexed amount, uint indexed timestamp);
+    event TicketTransfered(address indexed owner, address indexed to, uint indexed timestamp);
     event FeesRetrieved(uint indexed amount);
 
     address public ticketSeller; // ticket seller
@@ -21,7 +22,7 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     uint public constant MAX_NUM_OF_TICKETS = 100; // only 100 tickets can be minted
     uint public numOfTicketsMinted = 0;
-    uint private tokenCounter;
+    uint public tokenId;
 
     mapping(address => bool) public buyer;
     mapping(address => bool) public hasPaid;
@@ -30,6 +31,11 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     modifier onlyTicketSeller() {
         require(msg.sender == ticketSeller, "error: not ticketSeller");
+        _;
+    }
+    
+    modifier onlyTicketOwner() {
+        require(ownerOf(tokenId) == msg.sender, "error: failed to fetch ticket");
         _;
     }
 
@@ -56,9 +62,9 @@ contract NftTicketGeneratorV2 is ERC721 {
         ) {
             numOfTicketsMinted += 1;
             hasBoughtTicket[msg.sender] = true;
-            _safeMint(msg.sender, tokenCounter);
+            _safeMint(msg.sender, tokenId);
             // add to token counter after successful mint
-            tokenCounter ++;
+            tokenId ++;
             // emit event
             emit TicketMinted(msg.sender, block.timestamp);
         }
@@ -77,9 +83,9 @@ contract NftTicketGeneratorV2 is ERC721 {
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
         numOfTicketsMinted += 1;
-        _safeMint(msg.sender, tokenCounter);
+        _safeMint(msg.sender, tokenId);
         // add to token counter after successful mint
-        tokenCounter ++;
+        tokenId++;
         emit TicketMinted(msg.sender, block.timestamp);
     }
 
@@ -108,7 +114,9 @@ contract NftTicketGeneratorV2 is ERC721 {
         ticketPrice = _ticketPrice;
     }
 
-    function transferTicket(address to, uint ticketId) external {
-        require(ownerOf(tokenCounter) == msg.sender, "error: ticket not callers");
+    function transferTicket(address to, uint tokenId) external onlyTicketOwner {
+        safeTransferFrom(msg.sender, to, tokenId);
+        // emit event
+        emit TicketTransfered(msg.sender, to, block.timestamp);
     }
 }
