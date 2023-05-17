@@ -139,8 +139,8 @@ contract NftTicketGeneratorV2 is ERC721 {
         ticketSeller = payable(_newTicketSeller);
     }
 
-    function getAmountOfTicketsLeft() public view returns (uint) {
-        return maxNumOfTickets;
+    function getTicketPrice() public view returns (uint, uint, uint) {
+        return(minAmountToPay, ticketPrice, maxNumOfTickets);
     }
 
 }
