@@ -9,6 +9,7 @@ error Ticket__AlreadyBought();
  * This contract creates new tickets for users
  */
 contract NftTicketGeneratorV2 is ERC721 {
+    event TicketDetailsSaved(uint indexed timestamp);
     event TicketMinted(address indexed buyer, uint timestamp);
     event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint indexed timestamp);
     event Instlmnt(address indexed buyer, uint indexed amount, uint indexed timestamp);
@@ -131,6 +132,11 @@ contract NftTicketGeneratorV2 is ERC721 {
         safeTransferFrom(msg.sender, to, tokenId);
         // emit event
         emit TicketTransfered(msg.sender, to, block.timestamp);
+    }
+
+    function transferOwnership(address _newTicketSeller) external payable {
+        require(_newTicketSeller != address(0), "error: invalid address");
+        ticketSeller = payable(_newTicketSeller);
     }
 
 }
