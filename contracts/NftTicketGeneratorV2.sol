@@ -114,9 +114,11 @@ contract NftTicketGeneratorV2 is ERC721 {
         ticketPrice = _ticketPrice;
     }
 
-    function transferTicket(address to, uint tokenId) external onlyTicketOwner {
+    function transferTicket(address to, uint _tokenId) external onlyTicketOwner {
+        tokenId = _tokenId;
         safeTransferFrom(msg.sender, to, tokenId);
         // emit event
         emit TicketTransfered(msg.sender, to, block.timestamp);
     }
+
 }
