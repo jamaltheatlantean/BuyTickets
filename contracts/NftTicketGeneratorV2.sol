@@ -18,9 +18,9 @@ contract NftTicketGeneratorV2 is ERC721 {
     address public ticketSeller; // ticket seller
 
     uint public ticketPrice; // ticket amount
-    uint public minAmountToPay = 10 * 1e2;
+    uint public minAmountToPay;
 
-    uint public constant MAX_NUM_OF_TICKETS = 100; // only 100 tickets can be minted
+    uint public maxNumOfTickets; // only 100 tickets can be minted
     uint public numOfTicketsMinted = 0;
     uint public tokenId;
 
@@ -44,7 +44,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     }
 
     // use function to buy ticket installmentally
-    function buyTicket(uint amount) external payable {
+    function buyTicketInInstallment(uint amount) external payable {
         require(
             amount >= minAmountToPay,
             "error: not enough to pay for ticket"
@@ -58,13 +58,14 @@ contract NftTicketGeneratorV2 is ERC721 {
         amountPaid[msg.sender] += msg.value;
         if (
             amountPaid[msg.sender] >= ticketPrice &&
-            numOfTicketsMinted <= MAX_NUM_OF_TICKETS
+            numOfTicketsMinted <= maxNumOfTickets
         ) {
-            numOfTicketsMinted += 1;
-            hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenId);
+            //increase number of tickets minted
+            numOfTicketsMinted ++;
             // add to token counter after successful mint
             tokenId++;
+            hasBoughtTicket[msg.sender] = true;
             // emit event
             emit TicketMinted(msg.sender, block.timestamp);
         }
@@ -79,11 +80,12 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] != true,
             "error: one ticket per wallet"
         );
-        require(MAX_NUM_OF_TICKETS <= 100, "error: tickets sold out!");
+        require(maxNumOfTickets <= 100, "error: tickets sold out!");
+        _safeMint(msg.sender, tokenId);
         hasPaid[msg.sender] = true;
         hasBoughtTicket[msg.sender] = true;
-        numOfTicketsMinted += 1;
-        _safeMint(msg.sender, tokenId);
+        // increase number of tickets minted
+        numOfTicketsMinted ++;
         // add to token counter after successful mint
         tokenId++;
         emit TicketMinted(msg.sender, block.timestamp);
@@ -109,11 +111,19 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit FeesRetrieved(address(this).balance);
     }
 
-    function setTicketPrices(uint _ticketPrice, uint _minAmountToPay) external onlyTicketSeller {
+    function setTicketPriceMinAmountToPayMaxNumOfTickets(
+        uint _ticketPrice, 
+        uint _minAmountToPay,
+        uint _maxNumOfTickets) 
+    external onlyTicketSeller {
         require(_ticketPrice != 0, "error: price cannot be 0");
         require(_minAmountToPay != 0, "error: price cannot be 0");
+        require(_maxNumOfTickets != 0, "error: 0 tickets");
         ticketPrice = _ticketPrice;
         minAmountToPay = _minAmountToPay;
+        maxNumOfTickets = _maxNumOfTickets;
+        // emit event
+        emit TicketDetailsSaved(block.timestamp);
     }
 
     function transferTicket(address to, uint _tokenId) external onlyTicketOwner {
