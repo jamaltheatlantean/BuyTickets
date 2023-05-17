@@ -64,7 +64,7 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] = true;
             _safeMint(msg.sender, tokenId);
             // add to token counter after successful mint
-            tokenId ++;
+            tokenId++;
             // emit event
             emit TicketMinted(msg.sender, block.timestamp);
         }
@@ -109,9 +109,11 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit FeesRetrieved(address(this).balance);
     }
 
-    function setTicketPrice(uint _ticketPrice) external onlyTicketSeller {
+    function setTicketPrices(uint _ticketPrice, uint _minAmountToPay) external onlyTicketSeller {
         require(_ticketPrice != 0, "error: price cannot be 0");
+        require(_minAmountToPay != 0, "error: price cannot be 0");
         ticketPrice = _ticketPrice;
+        minAmountToPay = _minAmountToPay;
     }
 
     function transferTicket(address to, uint _tokenId) external onlyTicketOwner {
