@@ -48,7 +48,7 @@ contract NftTicketGeneratorV2 is ERC721 {
                             USER FACING FUNCTIONS
     ////////////////////////////////////////////////////////////////////////*/
     ///@notice function assigns new owner to contract
-    function transferOwnership(address _newTicketSeller) public onlyOwner {
+    function transferOwnership(address _newTicketSeller) public onlyTicketSeller {
         require(_newTicketSeller != address(0), "error: invalid address");
         ticketSeller = payable(_newTicketSeller);
     }
@@ -154,6 +154,10 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     function getTicketSeller() public view returns (address) {
         return ticketSeller;
+    }
+
+    function getUserTicketStatus() public view returns (bool, bool) {
+        return (hasPaid[msg.sender], hasBoughtTicket[msg.sender]);
     }
 
 }
