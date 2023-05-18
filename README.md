@@ -84,6 +84,7 @@ The contract has the following features:
 ## Events
 This contract makes use of the following events:
 
+-   `event TicketDetailsSaved(uint indexed timestamp)`: emitted when variables have been asigned value
 -   `event TicketMinted(address indexed buyer, uint timestamp)`: Emitted whenever a ticket has been completely purchased.
 -   `event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp)`: Emitted when a user gets a refund.
 -   `event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp)`: Emitted when a user pays only installment.
