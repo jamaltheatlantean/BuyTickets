@@ -80,6 +80,7 @@ The contract has the following features:
 -   Supports installment as a mode of payment. 
 -   Mints new tickets in the form of an ERC721.
 -   Users get a refund on incomplete payments.
+-   Users can transfer ticket ownership from within the contract.
 
 ## Events
 This contract makes use of the following events:
