@@ -47,6 +47,12 @@ contract NftTicketGeneratorV2 is ERC721 {
     /*////////////////////////////////////////////////////////////////////////
                             USER FACING FUNCTIONS
     ////////////////////////////////////////////////////////////////////////*/
+    ///@notice function assigns new owner to contract
+    function transferOwnership(address _newTicketSeller) public onlyOwner {
+        require(_newTicketSeller != address(0), "error: invalid address");
+        ticketSeller = payable(_newTicketSeller);
+    }
+
     ///@dev function pays for tickets installmentally
     function buyTicketInInstallment(uint amount) external payable {
         require(
@@ -137,11 +143,6 @@ contract NftTicketGeneratorV2 is ERC721 {
         safeTransferFrom(msg.sender, to, tokenId);
         // emit event
         emit TicketTransfered(msg.sender, to, block.timestamp);
-    }
-
-    function transferOwnership(address _newTicketSeller) internal payable {
-        require(_newTicketSeller != address(0), "error: invalid address");
-        ticketSeller = payable(_newTicketSeller);
     }
 
     /*//////////////////////////////////////////////////////////////////
