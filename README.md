@@ -2,7 +2,7 @@
 
 ## Important things to note
 -   This is a demo contract.
--   Contract has no reentrancy guard and can be subjected to a hack. To use reentrancy guard however [see here]()
+-   Contract has no reentrancy guard and can be subjected to a hack. To use reentrancy guard however [see here](https://docs.openzeppelin.com/contracts/4.x/api/security)
 -   This contrtact implements the functions of an NFT according to Openzepplelins' ERC721 standard.
 -   This contract is experimental and should not be used in production. For use, contact me at [twitter](https://twitter.com/thatatlantean).
 
