@@ -9,6 +9,7 @@ error Ticket__AlreadyBought();
  * This contract creates new tickets for users
  */
 contract NftTicketGeneratorV2 is ERC721 {
+    /*///////////////////////  EVENTS  ///////////////////////////*/
     event TicketDetailsSaved(uint indexed timestamp);
     event TicketMinted(address indexed buyer, uint timestamp);
     event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint indexed timestamp);
@@ -19,7 +20,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     address public ticketSeller; // ticket seller
 
     uint public ticketPrice; // ticket amount
-    uint public minAmountToPay;
+    uint public minAmountToPay; // variable holds minimum amount to pay per ticket
 
     uint public maxNumOfTickets; // only 100 tickets can be minted
     uint public numOfTicketsMinted = 0;
@@ -30,6 +31,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     mapping(address => uint) public amountPaid;
     mapping(address => bool) public hasBoughtTicket;
 
+    /*////////////////////  MODIFIERS  /////////////////////*/
     modifier onlyTicketSeller() {
         require(msg.sender == ticketSeller, "error: not ticketSeller");
         _;
