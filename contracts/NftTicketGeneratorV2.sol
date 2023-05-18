@@ -15,7 +15,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     event TicketMinted(address indexed buyer, uint timestamp);
     event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint indexed timestamp);
     event Instlmnt(address indexed buyer, uint indexed amount, uint indexed timestamp);
-    event TicketTransfered(address indexed owner, address indexed to, uint indexed timestamp);
+    event TicketTransfered(address indexed buyer, address indexed to, uint indexed timestamp);
     event FeesRetrieved(uint indexed amount);
 
     address public ticketSeller; // ticket seller
