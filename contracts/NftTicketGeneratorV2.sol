@@ -44,7 +44,10 @@ contract NftTicketGeneratorV2 is ERC721 {
         ticketSeller = msg.sender;
     }
 
-    // use function to buy ticket installmentally
+    /*////////////////////////////////////////////////////////////////////////
+                            USER FACING FUNCTIONS
+    ////////////////////////////////////////////////////////////////////////*/
+    ///@dev function pays for tickets installmentally
     function buyTicketInInstallment(uint amount) external payable {
         require(
             amount >= minAmountToPay,
@@ -74,7 +77,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit Instlmnt(msg.sender, amount, block.timestamp);
     }
 
-    // use function to buy ticket once
+    ///@dev use function to buy ticket once
     function buyTicketAtOnce(uint amount) external payable {
         require(amount >= ticketPrice, "error: not enough to pay at once");
         require(
@@ -92,7 +95,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit TicketMinted(msg.sender, block.timestamp);
     }
 
-    // use function to get a refund for installmental payers
+    ///@notice use function to call refund for installmental payers
     function refund() external payable {
         uint refundBal = amountPaid[msg.sender];
         amountPaid[msg.sender] = 0;
@@ -105,13 +108,14 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit BuyerRefunded(msg.sender, refundBal, block.timestamp);
     }
 
-    // use function to withdraw ticket fees
+    ///@dev use function to withdraw ticket fees from contract
     function withdraw() external onlyTicketSeller {
         payable(ticketSeller).transfer(address(this).balance);
         // emit event
         emit FeesRetrieved(address(this).balance);
     }
 
+    ///@dev use function to assign value to variables
     function setTicketPriceMinAmountToPayMaxNumOfTickets(
         uint _ticketPrice, 
         uint _minAmountToPay,
@@ -127,6 +131,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit TicketDetailsSaved(block.timestamp);
     }
 
+    ///@dev function uses onlyTicketOwner modifier to verify that caller is owner
     function transferTicket(address to, uint _tokenId) external onlyTicketOwner {
         tokenId = _tokenId;
         safeTransferFrom(msg.sender, to, tokenId);
@@ -134,11 +139,14 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit TicketTransfered(msg.sender, to, block.timestamp);
     }
 
-    function transferOwnership(address _newTicketSeller) external payable {
+    function transferOwnership(address _newTicketSeller) internal payable {
         require(_newTicketSeller != address(0), "error: invalid address");
         ticketSeller = payable(_newTicketSeller);
     }
 
+    /*//////////////////////////////////////////////////////////////////
+                            GETTER FUNCTIONS
+    //////////////////////////////////////////////////////////////////*/
     function getTicketPrice() public view returns (uint, uint, uint) {
         return(minAmountToPay, ticketPrice, maxNumOfTickets);
     }
