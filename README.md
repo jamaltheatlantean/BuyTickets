@@ -2,7 +2,7 @@
 
 ## Important things to note
 -   This is a demo contract.
--   Contract has no reentrancy guard and can be subjected to a hack.
+-   Contract has no reentrancy guard and can be subjected to a hack. To use reentrancy guard however [see here]()
 -   This contrtact implements the functions of an NFT according to Openzepplelins' ERC721 standard.
 -   This contract is experimental and should not be used in production. For use, contact me at [twitter](https://twitter.com/thatatlantean).
 
@@ -91,11 +91,14 @@ This contract makes use of the following events:
 
 ## Modifier
 The contract has only one modifier to limit access control:
+Update: Contract has two modifiers
 
--   `onlyTicketSeller`
+-   `onlyTicketSeller`: Limits access to only owner of contract.
+-   `onlyTicketOwner`: Limits access to only owner of ticket.
 
 ## Getters
 Getters aren't created yet.
+Update: Getters have been created.
 
 ## Contributing
 
