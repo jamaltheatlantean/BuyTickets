@@ -77,7 +77,7 @@ This smart contract was created to feauture a pay by installment function that l
 ## Features
 The contract has the following features:
 
--   Supports installment. 
+-   Supports installment as a mode of payment. 
 -   Mints new tickets in the form of an ERC721.
 -   Users get a refund on incomplete payments.
 
@@ -94,7 +94,7 @@ This contract makes use of the following events:
 
 ## Modifier
 The contract has only one modifier to limit access control:
-Update: Contract has two modifiers
+Update: Contract has two modifiers now.
 
 -   `onlyTicketSeller`: Limits access to only owner of contract.
 -   `onlyTicketOwner`: Limits access to only owner of ticket.
