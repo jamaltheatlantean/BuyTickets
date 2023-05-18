@@ -84,10 +84,12 @@ The contract has the following features:
 ## Events
 This contract makes use of the following events:
 
--   `event TicketDetailsSaved(uint indexed timestamp)`: emitted when variables have been asigned value
+-   `event OwnershipTransferred(address indexed _newTicketSeller, uint indexed timestamp)`: emitted when ownership has been transfered to a new account.
+-   `event TicketDetailsSaved(uint indexed timestamp)`: emitted when variables have been asigned value.
 -   `event TicketMinted(address indexed buyer, uint timestamp)`: Emitted whenever a ticket has been completely purchased.
 -   `event BuyerRefunded(address indexed buyer, uint indexed refundBal, uint timestamp)`: Emitted when a user gets a refund.
 -   `event Instlmnt(address indexed buyer, uint indexed amount, uint timestamp)`: Emitted when a user pays only installment.
+-   `event TicketTransfered(address indexed buyer, address indexed to, uint indexed timestamp)`: emitted when a user transfers his ticket. 
 -   `event FeesRetrieved(uint indexed amount)`: Emitted when the ticket seller withdraws the balance from the contract.
 
 ## Modifier
