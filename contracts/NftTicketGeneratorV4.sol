@@ -83,3 +83,22 @@ contract NftTicketGeneratorV2 is ERC721 {
         // emit event
         emit OwnershipTransferred(_newTicketSeller, block.timestamp);
     }
+
+    ///@dev use function to assign value to variables
+    function setTicketPriceMinAmountToPayMaxNumOfTickets(
+        uint _installmentPrice
+        uint _ticketPrice,
+        uint _minAmountToPay,
+        uint _maxNumOfTickets
+    ) external onlyTicketSeller {
+        require(_installmentPrice != 0, "error: price cannot be 0");
+        require(_ticketPrice != 0, "error: price cannot be 0");
+        require(_minAmountToPay != 0, "error: price cannot be 0");
+        require(_maxNumOfTickets != 0, "error: 0 tickets");
+        installmentPrice = _installmentPrice;
+        ticketPrice = _ticketPrice;
+        minAmountToPay = _minAmountToPay;
+        maxNumOfTickets = _maxNumOfTickets;
+        // emit event
+        emit TicketDetailsSaved(block.timestamp);
+    }
