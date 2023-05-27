@@ -139,6 +139,7 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     function mintTicket(address buyer) internal {
         _safeMint(buyer, tokenId);
+        // increase number of tokens minted
         numOfTicketsMinted++;
         tokenId++;
         // emit event
