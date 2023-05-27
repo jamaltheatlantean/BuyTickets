@@ -90,7 +90,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         uint _ticketPrice,
         uint _minAmountToPay,
         uint _maxNumOfTickets
-    ) external onlyTicketSeller {
+    ) public onlyTicketSeller {
         require(_installmentPrice != 0, "error: price cannot be 0");
         require(_ticketPrice != 0, "error: price cannot be 0");
         require(_minAmountToPay != 0, "error: price cannot be 0");
@@ -101,4 +101,12 @@ contract NftTicketGeneratorV2 is ERC721 {
         maxNumOfTickets = _maxNumOfTickets;
         // emit event
         emit TicketDetailsSaved(block.timestamp);
+    }
+
+    function payInstallment(uint amount) public {
+        require(amount == minAmountToPay, "error: need more eth");
+        amountPaid[msg.sender] += amount;
+        hasPaidInstallment[msg.sender] = true;
+        // emit event
+        emit InstallmentPaid(msg.sender, amount, block.timestamp);
     }
