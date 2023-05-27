@@ -104,9 +104,22 @@ contract NftTicketGeneratorV2 is ERC721 {
     }
 
     function payInstallment(uint amount) public {
-        require(amount == minAmountToPay, "error: need more eth");
+        require(amount == minAmountToPay, "error: not enough eth");
         amountPaid[msg.sender] += amount;
         hasPaidInstallment[msg.sender] = true;
+        if(amountPaid[msg.sender] == installmentPrice) {
+            ticketBuyer[msg.sender] = true;
+        }
         // emit event
         emit InstallmentPaid(msg.sender, amount, block.timestamp);
+    }
+
+    function buyTicket(uint amount) public {
+        require(amount == ticketPrice, "error: not enough eth");
+        amountPaid[msg.sender] += amount;
+        ticketBuyer[msg.sender] = true;
+    }
+
+    function claimTicket() public {
+        require(ticketbuyer[msg.sender] = true || amount)
     }
