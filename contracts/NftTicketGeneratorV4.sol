@@ -32,3 +32,36 @@ contract NftTicketGeneratorV2 is ERC721 {
         uint indexed timestamp
     );
     event FeesRetrieved(uint indexed amount);
+
+    address public ticketSeller; // ticket seller
+
+    uint public installmentPrice; // Installment price varies from ticket price
+    uint public ticketPrice; // Ticket Price
+    uint public minAmountToPay; // Variable holds minimum amount to pay per ticket
+
+    uint public maxNumOfTickets;
+    uint public numOfTicketsMinted = 0;
+    uint public tokenId;
+
+    mapping(address => bool) public ticketBuyer;
+    mapping(address => bool) public hasPaidInstallment;
+    mapping(address => uint) public amountPaid;
+    mapping(address => bool) public hasBoughtTicket;
+
+    /*////////////////////  MODIFIERS  /////////////////////*/
+    modifier onlyTicketSeller() {
+        require(msg.sender == ticketSeller, "error: not ticketSeller");
+        _;
+    }
+
+    modifier onlyTicketOwner() {
+        require(
+            ownerOf(tokenId) == msg.sender,
+            "error: failed to fetch ticket"
+        );
+        _;
+    }
+
+    constructor() ERC721("TicketToken", "TKN") {
+        ticketSeller = msg.sender;
+    }
