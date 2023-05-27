@@ -48,7 +48,9 @@ contract NftTicketGeneratorV2 is ERC721 {
     mapping(address => uint) public amountPaid;
     mapping(address => bool) public hasBoughtTicket;
 
-    /*////////////////////  MODIFIERS  /////////////////////*/
+    /*////////////////////////////////////////////////////////
+                            MODIFIERS
+    ///////////////////////////////////////////////////////*/
     modifier onlyTicketSeller() {
         require(msg.sender == ticketSeller, "error: not ticketSeller");
         _;
@@ -61,7 +63,23 @@ contract NftTicketGeneratorV2 is ERC721 {
         );
         _;
     }
-
+    /*////////////////////////////////////////////////////////
+                        CONSTRUCTOR
+    ////////////////////////////////////////////////////////*/
     constructor() ERC721("TicketToken", "TKN") {
         ticketSeller = msg.sender;
+    }
+
+    /*////////////////////////////////////////////////////////////////////////
+                            USER FACING FUNCTIONS
+    ////////////////////////////////////////////////////////////////////////*/
+    ///@notice function assigns new owner to contract
+    function transferOwnership(address _newTicketSeller)
+        public
+        onlyTicketSeller
+    {
+        require(_newTicketSeller != address(0), "error: invalid address");
+        ticketSeller = payable(_newTicketSeller);
+        // emit event
+        emit OwnershipTransferred(_newTicketSeller, block.timestamp);
     }
