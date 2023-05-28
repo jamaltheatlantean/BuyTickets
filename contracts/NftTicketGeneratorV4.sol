@@ -118,8 +118,13 @@ contract NftTicketGeneratorV2 is ERC721 {
     }
 
     function claimTicket() public {
-        require(amountPaid[msg.sender] >= ticketPrice, "error: user not eligible to mint);
+        require(amountPaid[msg.sender] >= ticketPrice, "error: user not eligible to mint");
         require(!hasBoughtTicket[msg.sender], "error: one ticket per address");
-        
+        _safeMint(msg.sender, tokenId);
+        tokenId ++;
+        numOfTicketsMinted ++;
+        // emit event
+        emit TicketMinted(msg.sender, block.timestamp);
+
     }
 }
