@@ -142,7 +142,12 @@ contract NftTicketGeneratorV4 is ERC721 {
     function withdraw() external onlyTicketSeller {
         payable(ticketSeller).transfer(address(this).balance);
         // emit event
-        emit FeesRetrieved(amount, block.timestamp);
+        emit FeesRetrieved(address(this).balance, block.timestamp);
+    }
+
+    function transferTicket(address to, uint _tokenId) public {
+        tokenId = _tokenId;
+        safeTransferFrom(msg.sender, to);
     }
 
     /*/////////////////////////////////////////////////////////////
