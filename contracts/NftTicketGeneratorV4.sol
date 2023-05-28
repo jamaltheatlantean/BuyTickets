@@ -128,4 +128,17 @@ contract NftTicketGeneratorV4 is ERC721 {
         // emit event
         emit TicketMinted(msg.sender, block.timestamp);
     }
+
+    ///@notice use function to call refund for installmental payers
+    function refund() external {
+        uint refundBal = amountPaid[msg.sender];
+        amountPaid[msg.sender] = 0;
+        if(hasBoughtTicket[msg.sender] != true) {
+            payable(msg.sender).transfer(refundBal);
+        } else {
+            revert Ticket__AlreadyBought();
+        }
+        //emit event
+        emit BuyerRefunded(msg.sender, refundBal, block.timestamp);
+    }
 }
