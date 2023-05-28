@@ -141,4 +141,8 @@ contract NftTicketGeneratorV4 is ERC721 {
         //emit event
         emit BuyerRefunded(msg.sender, refundBal, block.timestamp);
     }
+
+    function withdraw() external onlyTicketSeller {
+        
+    }
 }
