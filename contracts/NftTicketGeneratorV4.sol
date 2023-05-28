@@ -148,6 +148,8 @@ contract NftTicketGeneratorV4 is ERC721 {
     function transferTicket(address to, uint _tokenId) public {
         tokenId = _tokenId;
         safeTransferFrom(msg.sender, to);
+        // emit event
+        emit TicketTransfered(msg.sender, to, block.timestamp);
     }
 
     /*/////////////////////////////////////////////////////////////
