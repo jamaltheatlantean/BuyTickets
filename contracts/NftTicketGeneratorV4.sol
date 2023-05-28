@@ -25,13 +25,13 @@ contract NftTicketGeneratorV4 is ERC721 {
         uint indexed refundBal,
         uint indexed timestamp
     );
-    event TicketMinted(address indexed buyer, uint timestamp);
+    event TicketMinted(address indexed buyer, uint indexed timestamp);
     event TicketTransfered(
         address indexed buyer,
         address indexed to,
         uint indexed timestamp
     );
-    event FeesRetrieved(uint indexed amount);
+    event FeesRetrieved(uint indexed amount, uint indexed timestamp);
 
     address public ticketSeller; // ticket seller
 
@@ -85,16 +85,13 @@ contract NftTicketGeneratorV4 is ERC721 {
 
     ///@dev use function to assign value to variables
     function setTicketPriceMinAmountToPayMaxNumOfTickets(
-        uint _installmentPrice
         uint _ticketPrice,
         uint _minAmountToPay,
         uint _maxNumOfTickets
     ) public onlyTicketSeller {
-        require(_installmentPrice != 0, "error: price cannot be 0");
         require(_ticketPrice != 0, "error: price cannot be 0");
         require(_minAmountToPay != 0, "error: price cannot be 0");
         require(_maxNumOfTickets != 0, "error: 0 tickets");
-        installmentPrice = _installmentPrice;
         ticketPrice = _ticketPrice;
         minAmountToPay = _minAmountToPay;
         maxNumOfTickets = _maxNumOfTickets;
@@ -143,6 +140,8 @@ contract NftTicketGeneratorV4 is ERC721 {
     }
 
     function withdraw() external onlyTicketSeller {
-        
+        payable(ticketSeller).transfer(address(this).balance);
+        // emit event
+        emit FeesRetrieved(amount, block.timestamp);
     }
 }
