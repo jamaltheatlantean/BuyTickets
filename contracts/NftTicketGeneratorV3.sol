@@ -8,7 +8,7 @@ error Ticket__AlreadyBought();
 /**
  * @dev This contract creates new tickets for users
  */
-contract NftTicketGeneratorV2 is ERC721 {
+contract NftTicketGeneratorV3 is ERC721 {
     /*///////////////////////  EVENTS  ///////////////////////////*/
     event OwnershipTransferred(
         address indexed newTicketSeller,

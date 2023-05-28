@@ -8,7 +8,7 @@ error Ticket__AlreadyBought();
 /**
  * @dev This contract creates new tickets for users
  */
-contract NftTicketGeneratorV2 is ERC721 {
+contract NftTicketGeneratorV4 is ERC721 {
     /*///////////////////////  EVENTS  ///////////////////////////*/
     event OwnershipTransferred(
         address indexed newTicketSeller,
@@ -42,7 +42,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     uint public numOfTicketsMinted = 0;
     uint public tokenId;
 
-    mapping(address => bool) public ticketBuyer;
+    mapping(address => bool) public hasBoughtAtOnce;
     mapping(address => bool) public hasPaidInstallment;
     mapping(address => uint) public amountPaid;
     mapping(address => bool) public hasBoughtTicket;
@@ -113,7 +113,7 @@ contract NftTicketGeneratorV2 is ERC721 {
     function buyTicket(uint amount) public {
         require(amount >= ticketPrice, "error: not enough eth");
         amountPaid[msg.sender] += amount;
-        ticketBuyer[msg.sender] = true;
+        hasBoughtAtOnce[msg.sender] = true;
     }
 
     function claimTicket() public {
@@ -127,6 +127,5 @@ contract NftTicketGeneratorV2 is ERC721 {
         hasBoughtTicket[msg.sender] = true;
         // emit event
         emit TicketMinted(msg.sender, block.timestamp);
-
     }
 }

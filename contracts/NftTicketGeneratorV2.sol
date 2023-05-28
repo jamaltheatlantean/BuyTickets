@@ -83,8 +83,6 @@ contract NftTicketGeneratorV2 is ERC721 {
             hasBoughtTicket[msg.sender] = true;
             // emit event
             emit TicketMinted(msg.sender, block.timestamp);
-        } else {
-
         }
         // emit event
         emit Instlmnt(msg.sender, amount, block.timestamp);
