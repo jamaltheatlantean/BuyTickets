@@ -84,7 +84,7 @@ contract NftTicketGeneratorV4 is ERC721 {
     }
 
     ///@dev use function to assign value to variables
-    function setTicketPriceMinAmountToPayMaxNumOfTickets(
+    function setValues(
         uint _ticketPrice,
         uint _minAmountToPay,
         uint _maxNumOfTickets
@@ -144,4 +144,20 @@ contract NftTicketGeneratorV4 is ERC721 {
         // emit event
         emit FeesRetrieved(amount, block.timestamp);
     }
+
+    /*/////////////////////////////////////////////////////////////
+                        GETTER FUNCTIONS
+    /////////////////////////////////////////////////////////////*/
+    function getTicketDetails() public view returns (uint, uint, uint) {
+        return(minAmountToPay, ticketPrice, maxNumOfTickets);
+    }
+
+    function getTicketSeller() public view returns (address) {
+        return ticketSeller;
+    }
+
+    function getUserTicketStatus() public view returns (bool) {
+        return hasBoughtTicket[msg.sender];
+    }
+
 }

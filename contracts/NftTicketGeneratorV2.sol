@@ -137,7 +137,7 @@ contract NftTicketGeneratorV2 is ERC721 {
         require(_maxNumOfTickets != 0, "error: 0 tickets");
         ticketPrice = _ticketPrice;
         minAmountToPay = _minAmountToPay;
-        maxNumOfTickets = _maxNumOfTickets;
+        maxNumOfTickets = _maxNumOfTickets; 
         // emit event
         emit TicketDetailsSaved(block.timestamp);
     }
