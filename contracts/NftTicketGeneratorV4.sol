@@ -35,11 +35,10 @@ contract NftTicketGeneratorV2 is ERC721 {
 
     address public ticketSeller; // ticket seller
 
-    uint public installmentPrice; // Installment price varies from ticket price
     uint public ticketPrice; // Ticket Price
     uint public minAmountToPay; // Variable holds minimum amount to pay per ticket
 
-    uint public maxNumOfTickets;
+    uint public maxNumOfTickets; // to be set by ticket seller after deployment
     uint public numOfTicketsMinted = 0;
     uint public tokenId;
 
@@ -118,11 +117,14 @@ contract NftTicketGeneratorV2 is ERC721 {
     }
 
     function claimTicket() public {
-        require(amountPaid[msg.sender] >= ticketPrice, "error: user not eligible to mint");
+        require(amountPaid[msg.sender] >= ticketPrice, 
+        "error: user not eligible to mint"
+        );
         require(!hasBoughtTicket[msg.sender], "error: one ticket per address");
         _safeMint(msg.sender, tokenId);
         tokenId ++;
         numOfTicketsMinted ++;
+        hasBoughtTicket[msg.sender] = true;
         // emit event
         emit TicketMinted(msg.sender, block.timestamp);
 
