@@ -63,6 +63,9 @@ I tried to simplify this process in V1 of the contract but of course it didn't w
 
     STATUS: Success!
     After a successful series of testing this contract on the Remix IDE, all functions responded perfectly.
+    UPDATE: Failed!
+    Months after, i revisted this contract for presentation in a demo, and found out that the safeMint function doesnt call from the if tag within the buyTicketInInstallment() function. With that discovery I the author of this contract pronounced it a failed attempt.
+
 
 Authors remark: The NftTicketGeneratorV2.sol is the most efficient smart contract for this project.
 

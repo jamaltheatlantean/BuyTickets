@@ -142,14 +142,6 @@ contract NftTicketGeneratorV2 is ERC721 {
         emit TicketDetailsSaved(block.timestamp);
     }
 
-    ///@dev function uses onlyTicketOwner modifier to verify that caller is owner
-    function transferTicket(address to, uint _tokenId) external onlyTicketOwner {
-        tokenId = _tokenId;
-        safeTransferFrom(msg.sender, to, tokenId);
-        // emit event
-        emit TicketTransfered(msg.sender, to, block.timestamp);
-    }
-
     /*//////////////////////////////////////////////////////////////////
                             GETTER FUNCTIONS
     //////////////////////////////////////////////////////////////////*/
