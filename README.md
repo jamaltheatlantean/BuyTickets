@@ -81,7 +81,9 @@ Authors remark: Although the NftTicketGeneratorV3.sol was a success, it lacked t
 
 ## NftTicketGeneratorV4.sol
 This was the breakthrough smart contract i needed, that would help users pay in installment, pay at once, and transfer the ticket.
-To do this i recreated the function that lets users buy the ticket in installment, but this time the safeMint() function isn't called from within the buyTicket() or payInstallment() function, rather those functions just record the amountPaid of msg.sender. 
+To do this i recreated the function that lets users buy the ticket in installment, but this time the `safeMint()` function isn't called from within the `buyTicket()` or `payInstallment()` function, rather those functions just record the amountPaid of msg.sender (Users).
+The user then calls the `claimTicket()` function that requires that the amountPaid of msg.sender is greater than or equal to the price of a ticket. Once this require checks out fine, it mints a new ticket of the user by executing the `safeMint()` function.
+
 
 
 ### ABout the Project
@@ -142,7 +144,7 @@ This contract is licensed under the MIT License.
 ## Contact
 
 Jamaltheatlantean [Gabriel Isobara]                               
-Send me a tweet - [@twitter](https://twitter.com/ThatAtlantean)                                                            
+Connect with me on [@twitter](https://twitter.com/ThatAtlantean)                                                            
 
-Or write me a mail - jamaltheatlantean@gmail.com
+Or send me an email to - jamaltheatlantean@gmail.com
 
