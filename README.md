@@ -79,6 +79,10 @@ And the `transferTicket()` function, that helps the user transfer the ticket bou
 
 Authors remark: Although the NftTicketGeneratorV3.sol was a success, it lacked the true purpose for creating the smart contract, which is to let users pay for tickets in installmental. Without this function the original point of the contract was lost.
 
+## NftTicketGeneratorV4.sol
+This was the breakthrough smart contract i needed, that would help users pay in installment, pay at once, and transfer the ticket.
+To do this i recreated the function that lets users buy the ticket in installment, but this time the safeMint() function isn't called from within the buyTicket() or payInstallment() function, rather those functions just record the amountPaid of msg.sender. 
+
 
 ### ABout the Project
 
