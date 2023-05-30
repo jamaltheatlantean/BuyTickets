@@ -82,7 +82,10 @@ Authors remark: Although the NftTicketGeneratorV3.sol was a success, it lacked t
 ## NftTicketGeneratorV4.sol
 This was the breakthrough smart contract i needed, that would help users pay in installment, pay at once, and transfer the ticket.
 To do this i recreated the function that lets users buy the ticket in installment, but this time the `safeMint()` function isn't called from within the `buyTicket()` or `payInstallment()` function, rather those functions just record the amountPaid of msg.sender (Users).
-The user then calls the `claimTicket()` function that requires that the amountPaid of msg.sender is greater than or equal to the price of a ticket. Once this require checks out fine, it mints a new ticket of the user by executing the `safeMint()` function.
+The user then calls the `claimTicket()` function, a new function i added that requires the amountPaid of msg.sender is greater than or equal to the price of a ticket. Once this require checks out fine, it mints a new ticket of the user by executing the `safeMint()` function.
+
+    STATUS: Success!
+    At last users can now call the payInstallment() function to make an installment payment, and once they've paid enough to get the ticket they call the claimTicket() function which mints a new ticket and assigns a unique ID to them.
 
 
 
