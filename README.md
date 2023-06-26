@@ -88,7 +88,6 @@ The user then calls the `claimTicket()` function, a new function i added that re
     At last users can now call the payInstallment() function to make an installment payment, and once they've paid enough to get the ticket they call the claimTicket() function which mints a new ticket and assigns a unique ID to them.
 
 
-
 ### ABout the Project
 
 This smart contract was created to feauture a pay by installment function that lets users pay for the price of a ticket gradually but it also supports a pay-at-once option.
@@ -147,7 +146,7 @@ This contract is licensed under the MIT License.
 ## Contact
 
 Jamaltheatlantean [Gabriel Isobara]                               
-Connect with me on [@twitter](https://twitter.com/ThatAtlantean)                                                            
+Connect with me on [@twitter](https://twitter.com/ThatAtlantean)                                                         
 
 Or send me an email to - jamaltheatlantean@gmail.com
 
